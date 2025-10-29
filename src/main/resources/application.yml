@@ -1,0 +1,71 @@
+server:
+  port: 9999
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848 #配置Nacos地址
+        username: nacos
+        password: "#Alone117"
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:9090
+        port: 8719
+      web-context-unify: false # 关闭上下文整合，启用链路模式
+    gateway:
+      discovery:
+        locator:
+          enabled: true # 开启服务发现
+          lower-case-service-id: true # 服务名小写
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin Access-Control-Allow-Headers Access-Control-Allow-Methods
+      routes:
+        - id: auth-id
+          uri: lb://auth
+          predicates:
+            - Path=/api/auth/**
+        - id: admin-id
+          uri: lb://admin
+          predicates:
+            - Path=/api/admin/users/**,/api/admin/roles/**,/api/admin/auth-tokens/**,/api/admin/permissions/**,/api/admin/audit-logs/**
+        - id: problem-id
+          uri: lb://problem
+          predicates:
+            - Path=/api/admin/problems/**,/api/admin/tags/**,/api/admin/categories/**,/api/admin/difficulties/**,/api/admin/languages/**,/api/admin/datasets/**,/api/admin/groups/**
+        - id: interaction-id
+          uri: lb://interaction
+          predicates:
+            - Path=/api/admin/interaction/**
+        - id: contests-id
+          uri: lb://contests
+          predicates:
+            - Path=/api/admin/contests/**
+        - id: judge-id
+          uri: lb://judge
+          predicates:
+            - Path=/api/admin/judge/**
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
+    org.springframework.web.reactive: DEBUG
+    com.david: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+app:
+  white-list-paths:
+    - /api/auth/register
+    - /api/auth/register/code
+    - /api/auth/login
+    - /api/auth/refresh
+    - /api/auth/forgot
+    - /api/auth/introspect
+    - /actuator/**
