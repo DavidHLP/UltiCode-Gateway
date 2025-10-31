@@ -34,7 +34,7 @@ public class GatewayConfiguration {
                 corsConfiguration.setAllowedOrigins(allowedOrigins);
             }
         } else {
-            corsConfiguration.setAllowedOriginPatterns(List.of("http://localhost:5173"));
+            corsConfiguration.setAllowedOriginPatterns(List.of("http://localhost:5173" , "http://localhost:5174"));
         }
         corsConfiguration.setAllowedMethods(
                 List.of(
