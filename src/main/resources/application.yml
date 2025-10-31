@@ -32,21 +32,25 @@ spring:
           predicates:
             - Path=/api/admin/users/**,/api/admin/roles/**,/api/admin/auth-tokens/**,/api/admin/permissions/**,/api/admin/audit-logs/**
         - id: problem-id
-          uri: lb://problem
+          uri: lb://admin-problem
           predicates:
             - Path=/api/admin/problems/**,/api/admin/tags/**,/api/admin/categories/**,/api/admin/difficulties/**,/api/admin/languages/**,/api/admin/datasets/**,/api/admin/groups/**
         - id: interaction-id
-          uri: lb://interaction
+          uri: lb://admin-interaction
           predicates:
             - Path=/api/admin/interaction/**
         - id: contests-id
-          uri: lb://contests
+          uri: lb://admin-contests
           predicates:
             - Path=/api/admin/contests/**
         - id: judge-id
-          uri: lb://judge
+          uri: lb://admin-judge
           predicates:
             - Path=/api/admin/judge/**
+        - id: public-problem-id
+          uri: lb://public-problem
+          predicates:
+            - Path=/api/public/problems/**
 logging:
   level:
     org.springframework.cloud.gateway: DEBUG
