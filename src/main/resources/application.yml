@@ -31,19 +31,19 @@ spring:
           uri: lb://admin
           predicates:
             - Path=/api/admin/users/**,/api/admin/roles/**,/api/admin/auth-tokens/**,/api/admin/permissions/**,/api/admin/audit-logs/**
-        - id: problem-id
+        - id: admin-problem-id
           uri: lb://admin-problem
           predicates:
             - Path=/api/admin/problems/**,/api/admin/tags/**,/api/admin/categories/**,/api/admin/difficulties/**,/api/admin/languages/**,/api/admin/datasets/**,/api/admin/groups/**
-        - id: interaction-id
+        - id: admin-interaction-id
           uri: lb://admin-interaction
           predicates:
             - Path=/api/admin/interaction/**
-        - id: contests-id
+        - id: admin-contests-id
           uri: lb://admin-contests
           predicates:
             - Path=/api/admin/contests/**
-        - id: judge-id
+        - id: admin-judge-id
           uri: lb://admin-judge
           predicates:
             - Path=/api/admin/judge/**
