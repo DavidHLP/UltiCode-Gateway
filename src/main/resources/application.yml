@@ -47,10 +47,18 @@ spring:
           uri: lb://admin-judge
           predicates:
             - Path=/api/admin/judge/**
+        - id: admin-dashboard-id
+          uri: lb://admin-dashboard
+          predicates:
+            - Path=/api/admin/dashboard/**
         - id: public-problem-id
           uri: lb://public-problem
           predicates:
             - Path=/api/public/problems/**
+        - id: public-dashboard-id
+          uri: lb://public-dashboard
+          predicates:
+            - Path=/api/public/dashboard/**
 logging:
   level:
     org.springframework.cloud.gateway: DEBUG
